@@ -1,4 +1,5 @@
 import ast
+import re
 import subprocess
 
 import black
@@ -44,3 +45,13 @@ def run_script(script_path, args=None):
                             check=False)  # This raises CalledProcessError if the script fails
     
     return result.stdout
+
+def update_content(content, new_stats, pattern):
+    if re.search(pattern, content):
+        updated_content = re.sub(pattern, new_stats, content)
+    else:
+        if not content.endswith('\n'):
+            content += '\n'
+        updated_content = content + new_stats + '\n'
+    
+    return updated_content

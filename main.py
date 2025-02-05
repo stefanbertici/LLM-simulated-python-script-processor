@@ -1,5 +1,5 @@
 import subprocess
-from utils.analyze_utils import format_script, get_lines_functions_ast
+from utils.analyze_utils import format_script, get_lines_functions_ast, update_content
 from utils.analyze_utils import get_imports_ast
 from utils.analyze_utils import run_script
 import argparse
@@ -29,13 +29,7 @@ def main():
                 print(new_stats)
         
                 pattern = r"# lines of code = \d+, functions = \d+ @\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+"
-    
-                if re.search(pattern, content):
-                    updated_content = re.sub(pattern, new_stats, content)
-                else:
-                    if not content.endswith('\n'):
-                        content += '\n'
-                    updated_content = content + new_stats + '\n'
+                updated_content = update_content(content, new_stats, pattern)
     
             with open(args.file_name, 'w') as file:
                 file.write(updated_content)
@@ -50,13 +44,7 @@ def main():
                 print(new_stats)
         
                 pattern = r"# imports = [a-zA-Z, ]* @\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d+"
-    
-                if re.search(pattern, content):
-                    updated_content = re.sub(pattern, new_stats, content)
-                else:
-                    if not content.endswith('\n'):
-                        content += '\n'
-                    updated_content = content + new_stats + '\n'
+                updated_content = update_content(content, new_stats, pattern)
     
             with open(args.file_name, 'w') as file:
                 file.write(updated_content)
