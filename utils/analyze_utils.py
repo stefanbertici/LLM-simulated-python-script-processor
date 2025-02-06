@@ -32,7 +32,7 @@ def format_script(content):
 
 def run_script(script_path, args=None):
     # Prepare the command - first the Python interpreter, then script path, then any arguments
-    command = ['python', '-u', script_path]
+    command = ['python', script_path]
     if args:
         command.extend(args)
         
@@ -42,7 +42,7 @@ def run_script(script_path, args=None):
     result = subprocess.run(command, 
                             text=True,
                             capture_output=True,
-                            check=False)  # This raises CalledProcessError if the script fails
+                            check=True)  # This raises CalledProcessError if the script fails
     
     return result.stdout
 

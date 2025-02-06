@@ -13,6 +13,7 @@ def function1():
 
 
 class MyClass:
+
     def method1(self):
         def nested_function():
             pass

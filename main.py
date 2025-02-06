@@ -4,7 +4,6 @@ from utils.analyze_utils import get_imports_ast
 from utils.analyze_utils import run_script
 import argparse
 import datetime
-import re
 
 def main():
     parser = argparse.ArgumentParser("python code reviewer")
